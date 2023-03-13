@@ -6,46 +6,64 @@ class ROICalculator():
         self.cashflow = 0
         self.ROIperc = 0
     def TotalIncome(self):
-        print("Hello! Let's start calculationg the ROI percentage for your rental property.\n")
+        print("\nHello! Let's start calculationg the ROI percentage for your rental property.\n")
+        print("We will start by calculating the total income being generated from the property.\n")
         while True:
-            rentalIncome = float(input("What is the monthly rent for your property? "))
-            if type(rentalIncome) == float:
+            rentalIncome = input("What is the monthly rent for your property? ")
+            try:
+                rentalIncome = float(rentalIncome)
                 break
-            else:
+            except:
                 print("You must enter a numerical value.")
         while True:
             response = input("Is there anything else on your property that will generate income such as laundry, storage, etc? (Yes or No) ")
+            otherIncome = []
             if response.title() == "Yes":
-                otherIncome = input("What is the total monthly income generated from them? ")
+                while True:
+                    r1= input("Please enter the amount for each form of income one by one. When you are done, type 'Done'. ")
+                    if r1.title() == "Done":
+                        break
+                    else:
+                        try:
+                            r1 = float(r1)
+                            otherIncome.append(r1)
+                        except:
+                            print("Please enter a numerical value or type 'Done' when finished.")
                 break
             elif response.title() == "No":
-                otherIncome = 0.00
+                otherIncome.append(0.00)
                 break
             else:
                 print("Please enter a valid response (Yes or No).")
-        self.income = rentalIncome + otherIncome
+        otherIncomeSum = sum(otherIncome)
+        self.income = rentalIncome + otherIncomeSum
+        self.income = round(self.income, 2)
         print(f"\nYour total monthly income for this property is ${self.income}.\n")
         return self.income
     def TotalExpenses(self):
+        print("Now we will calculate the total expenses involved in this property.\n")
         while True:
-            tax = float(input("How much do you pay in taxes on your property monthly? "))
-            if type(tax) == float:
+            tax = input("How much do you pay in taxes on your property monthly? ")
+            try:
+                tax = float(tax)
                 break
-            else:
+            except:
                 print("Please enter a numerical value.")
         while True:
-            insurance = float(input("How much is the insurance for your rental property monthly? "))
-            if type(insurance) == float:
+            insurance = input("How much is the insurance for your rental property monthly? ")
+            try:
+                insurance = float(insurance)
                 break
-            else:
+            except:
                 print("Please enter a numerical value.")
         while True:
             response2 = input("Do you pay for any of the utilities on your rental property? (Yes or No) ")
             if response2.title() == "Yes":
-                utilities = float(input("How much do you pay for utilities on your property monthly? "))
-                if type(utilities) == float:
-                    continue
-                else:
+                utilities = input("How much do you pay for utilities on your property monthly? ")
+                try:
+                    utilities = float(utilities)
+                    break
+                except:
                     print("Please enter a numerical value")
                 break
             elif response2.title() == "No":
@@ -54,34 +72,37 @@ class ROICalculator():
             else:
                 print("Please enter a valid response (Yes or No).")
         while True:
-            repairs = float(input("How much do you pay in repairs monthly? "))
-            if type(repairs) == float:
+            repairs = input("How much do you pay in repairs monthly? ")
+            try:
+                repairs = float(repairs)
                 break
-            else:
+            except:
                 print("Please enter a numerical value.")
         while True:
-            mortgage = float(input("How much is your monthly mortgage payment? "))
-            if type(mortgage) == float:
+            mortgage = input("How much is your monthly mortgage payment? ")
+            try:
+                mortgage = float(mortgage)
                 break
-            else:
+            except:
                 print("Please enter a numerical value")
         while True:
-            vacancy = float(input("How much do you set aside monthly for future vacancies? "))
-            if type(vacancy) == float:
+            vacancy = input("How much do you set aside monthly for future vacancies? ")
+            try:
+                vacancy = float(vacancy)
                 break
-            else:
+            except:
                 print("Please enter a numerical value.")
         while True:
             response3 = input("Do you have any other monthly expenses such as Property Management, Cap X, Lawn Services, Pest Control, HOA, etc? (Yes or No) ")
             otherExpenses = []
             if response3.title() == "Yes":
                 while True:
-                    response4= input("Please enter the amount for each expense one by one. When you are done, type 'Done'. ")
+                    response4= input("Please enter the amount for each expense one by one pressing enter after each one. When you are done, type 'Done'. ")
                     if response4.title() == "Done":
                         break
                     else:
                         try:
-                            response4 = int(response4)
+                            response4 = float(response4)
                             otherExpenses.append(response4)
                         except:
                             print("Please enter a numerical value or type 'Done' when finished.")
@@ -94,27 +115,33 @@ class ROICalculator():
             return otherExpenses
         totalOtherExpenses = sum(otherExpenses)
         self.expenses = tax + insurance + totalOtherExpenses + utilities + repairs + vacancy + mortgage
-        print(f"\nYour total monthly expenses for this property is ${self.expenses}.\n")
+        self.expenses = round(self.expenses,2)
+        print(f"\nYour total monthly expenses for this property cost ${self.expenses}.\n")
         return self.expenses
     def cashFlow(self):
         self.cashflow = self.income - self.expenses
+        self.cashflow = round(self.cashflow,2)
         print(f"\nYour cash flow is how much you are making monthly after expenses are taken into account. Your cash flow for this property is ${self.cashflow} a month\n")
         return self.cashflow
     def ROI(self):
+        print("We are almost there!\n")
+        print("Finally, we will ask a couple of questions regarding the investments put into this property.\n")
         while True:
-            downpayment = float(input("What was the down payment for your rental property? "))
-            if type(downpayment) == float:
+            downpayment = input("What was the down payment for your rental property? ")
+            try:
+                downpayment = float(downpayment)
                 break
-            else:
+            except:
                 print("Please enter a numerical value.")
         while True:
-            closingcost = float(input("What was the closing cost for your rental property? "))
-            if type(closingcost) == float:
+            closingcost = input("What was the closing cost for your rental property? ")
+            try:
+                closingcost = float(closingcost)
                 break
-            else:
+            except:
                 print("Please enter a numerical value.")
         while True:
-            response5 = input("Do you plan to do any repairs/renovations on your property prior to renting it out? (Yes or No)")
+            response5 = input("Do you plan to do any repairs/renovations on your property prior to renting it out? (Yes or No) ")
             if response5.title() == "Yes":
                 repaircost = float(input("How much are repair/renovation costs? "))
                 break
@@ -133,7 +160,7 @@ class ROICalculator():
                         break
                     else:
                         try:
-                            response7 = int(response7)
+                            response7 = float(response7)
                             otherinitialexpenses.append(response7)
                         except:
                             print("Please enter a numerical value or type 'Done' when finished.")
@@ -147,6 +174,7 @@ class ROICalculator():
         totalinvestment = initialexpenses + downpayment + closingcost + repaircost
         annualcashflow = self.cashflow * 12
         self.ROIperc = (annualcashflow/totalinvestment) * 100
+        self.ROIperc = round(self.ROIperc,2)
         print("\nCongratulations! Your ROI has been calculated!")
         print(f"\nYour ROI for this property is {self.ROIperc}%!\n")
         return self.ROIperc
@@ -155,18 +183,14 @@ Renter = ROICalculator()
 Renter2 = ROICalculator()
 
 def run():
-    while True:
-        Renter.TotalIncome()
-        Renter.TotalExpenses()
-        Renter.cashFlow()
-        Renter.ROI()
-        break
-    while True:
-        Renter.TotalIncome()
-        Renter.TotalExpenses()
-        Renter.cashFlow()
-        Renter.ROI()
-        break
+    Renter.TotalIncome()
+    Renter.TotalExpenses()
+    Renter.cashFlow()
+    Renter.ROI()
+    Renter2.TotalIncome()
+    Renter2.TotalExpenses()
+    Renter2.cashFlow()
+    Renter2.ROI()
 run()
        
 
