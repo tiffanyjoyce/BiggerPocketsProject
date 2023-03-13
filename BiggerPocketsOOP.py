@@ -155,7 +155,7 @@ class ROICalculator():
             otherinitialexpenses = []
             if response6.title() == "Yes":
                 while True:
-                    response7= input("Please enter the amount for each expense one by one. When you are done, type 'Done'. ")
+                    response7= input("Please enter the amount for each investment one by one. When you are done, type 'Done'. ")
                     if response7.title() == "Done":
                         break
                     else:
